@@ -1,5 +1,5 @@
 {
-  "name": "react-tutorial",
+  "name": "react-svg",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -18,7 +18,7 @@
   "bugs": {
     "url": "https://github.com/likr/react-svg/issues"
   },
-  "homepage": "https://Kohzuki-Nanako.github.io/react-svg/",
+  "homepage": "https://likr.github.io/react-svg/",
   "dependencies": {
     "bulma": "^0.9.0",
     "react": "^16.13.1",
