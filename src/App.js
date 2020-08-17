@@ -1,6 +1,13 @@
 import React,{useState} from "react";
 
 const App = () => {
+  var graphs = []
+  graphs.push(<Graph1 />)
+  graphs.push(<Graph2 />)
+  graphs.push(<Graph3 />)
+  graphs.push(<Graph4 />)
+  const [i, setI] = useState();
+  console.log(graphs)
   return (<div>
     <section class="hero is-medium is-light is-bold">
       <div class="hero-body">
@@ -21,8 +28,8 @@ const App = () => {
         <p class="title">Two</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
         
-        <Select />
-        <Graph4 />
+        <Select setI = {i, setI}/>
+        {graphs[i]}
       </div>
     </div>
     <div class="tile is-7 is-vertical is-parent">
@@ -32,6 +39,7 @@ const App = () => {
         <p>Suspendisse varius ligula in molestie lacinia. Maecenas varius eget ligula a sagittis. Pellentesque interdum, nisl nec interdum maximus, augue diam porttitor lorem, et sollicitudin felis neque sit amet erat. Maecenas imperdiet felis nisi, fringilla luctus felis hendrerit sit amet. Aenean vitae gravida diam, finibus dignissim turpis. Sed eget varius ligula, at volutpat tortor.</p>
         <p>Integer sollicitudin, tortor a mattis commodo, velit urna rhoncus erat, vitae congue lectus dolor consequat libero. Donec leo ligula, maximus et pellentesque sed, gravida a metus. Cras ullamcorper a nunc ac porta. Aliquam ut aliquet lacus, quis faucibus libero. Quisque non semper leo.</p>
         <Graph />
+        
       </div>
     
       <div class="tile is-child box">
@@ -46,29 +54,20 @@ const App = () => {
   );
 };
 
-const Select = () => {
-  const [d,setD] = useState([])
+const Select = (props) => {
   const change = (event) => {
-    setD(event.target.value)
-    if(event.target.value === 1){
-      setD(<Graph1 />)
-    }else if(event.target.value === 2){
-      setD(<Graph2 />)
-    } else if(event.target.value === 3){
-      setD(<Graph3 />)
-    } else {
-      setD(<Graph4 />)
-    }
+    console.log(event.target.value)
+    props.setI(event.target.value-1)
   }
   return ( 
    <form> 
     <div class="select">
-     <select value = "0" onchange={change}>
+     <select onChange = {change}>
         <option value="0">----</option>
-        <option value="1">インターネット普及率</option>
-        <option value="2">電子政府率の国際比較</option>
-        <option value="3">行政のオンライン化状況</option>
-        <option value="4">マイナンバーカード普及率</option>
+        <option value="1"　>インターネット普及率</option>
+        <option value="2"　>電子政府率の国際比較</option>
+        <option value="3"　>行政のオンライン化状況</option>
+        <option value="4"　>マイナンバーカード普及率</option>
      </select>
     </div>  
    </form>  
