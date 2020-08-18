@@ -1,5 +1,6 @@
 import React,{useState} from "react";
 
+
 const App = () => {
   var graphs = []
   graphs.push(<Graph1 />)
@@ -7,14 +8,17 @@ const App = () => {
   graphs.push(<Graph3 />)
   graphs.push(<Graph4 />)
   const [i, setI] = useState();
+  const [contry, setContry] = useState("")
   console.log(graphs)
   return (<div>
-    <section class="hero is-medium is-light is-bold">
+    <section class="hero is-medium is-light is-bold" style="background-image: url('./media/nihonchizu_area.png')">
       <div class="hero-body">
         <div class="container">
           <h1 class="title">人手不足からみる日本の現状</h1>
           <h2 class="subtitle">生産性が低い日本</h2>
         </div>
+        
+        
       </div>
     </section>
     <div className="container">
@@ -23,6 +27,9 @@ const App = () => {
       <div class="tile is-child box">
         <p class="title">One</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
+        <NameForm setContry = {contry, setContry}/>
+        {console.log(contry)}
+        <Graph props = {contry}/>
       </div>
       <div class="tile is-child box">
         <p class="title">Two</p>
@@ -38,7 +45,7 @@ const App = () => {
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam semper diam at erat pulvinar, at pulvinar felis blandit. Vestibulum volutpat tellus diam, consequat gravida libero rhoncus ut. Morbi maximus, leo sit amet vehicula eleifend, nunc dui porta orci, quis semper odio felis ut quam.</p>
         <p>Suspendisse varius ligula in molestie lacinia. Maecenas varius eget ligula a sagittis. Pellentesque interdum, nisl nec interdum maximus, augue diam porttitor lorem, et sollicitudin felis neque sit amet erat. Maecenas imperdiet felis nisi, fringilla luctus felis hendrerit sit amet. Aenean vitae gravida diam, finibus dignissim turpis. Sed eget varius ligula, at volutpat tortor.</p>
         <p>Integer sollicitudin, tortor a mattis commodo, velit urna rhoncus erat, vitae congue lectus dolor consequat libero. Donec leo ligula, maximus et pellentesque sed, gravida a metus. Cras ullamcorper a nunc ac porta. Aliquam ut aliquet lacus, quis faucibus libero. Quisque non semper leo.</p>
-        <Graph />
+        <Graph0 />
         
       </div>
     
@@ -75,7 +82,7 @@ const Select = (props) => {
 }
 
 
-const Graph = () => {
+const Graph0 = () => {
   
     const width = 745
     const height = 900
@@ -543,6 +550,393 @@ const Graph4 = () => {
   </svg>
 );
 };
+
+const NameForm = (props) => {
+  const data = ["Italy",   "America", "Germany", "Korea", "England", "Switzerland", "Luxembourg", "France", "Canada"]
+  const handleChange = (event) => {
+    if(event.target.value <= 9 && event.target.value > 0){
+      props.setContry(data[event.target.value - 1])
+    }else{
+      alert("That input is incorrect.")
+    }
+  }
+
+  const change = (event) => {
+    setS(event.target.value)
+  }
+  const [s, setS] = useState("")
+  console.log(s)
+  return (
+    <div>
+      <p>国番号を入力:</p>
+      <p>(1.イタリア　2.アメリカ　3.ドイツ　4.韓国　5.イングランド　6.スイス　7.ルクセンブルグ　8.フランス　9.カナダ)</p>
+      <label>
+        
+        <input type="text" value={s} onChange = {change}/>
+      </label>
+      <button value = {s} onClick = {handleChange}>
+        描画
+      </button>
+    </div>
+  );
+}
+
+
+
+const Graph = ({props}) =>{
+  const width = 700
+  const height = 565
+
+
+  const data = [
+    {year: 1970, Italy: 4154, America: 6093, Germany: 5292, Korea: 754, England: 4172, Switzerland: 8229, Luxembourg: 6377, France: 4368, Canada: 5415, Japan: 3990},
+    {year: 1980, Italy: 9795, America: 12547, Germany: 11647, Korea: 2401,England: 8446, Switzerland: 15468, Luxembourg: 12729, France: 9671, Canada: 11749, Japan: 8798},
+    {year: 1985, Italy: 13707, America: 18192, Germany: 16219, Korea: 4528, England: 12210, Switzerland: 21031, Luxembourg: 18467, France: 13149, Canada: 16343, Japan: 13462}, 
+    {year: 1990, Italy: 18609, America: 23835, Germany: 21471, Korea: 8273, England: 16701, Switzerland: 27267, Luxembourg: 29660, France: 17618, Canada: 20246, Japan: 19549},
+    {year: 1995, Italy: 22360, America: 28658, Germany: 23689, Korea: 13299, England: 20433, Switzerland: 29672, Luxembourg: 39550, France: 20750, Canada: 23476, Japan: 23410},
+    {year: 2000, Italy: 26076, America: 36305, Germany: 27551, Korea: 18083, England: 26258, Switzerland: 35434, Luxembourg: 55263, France: 26098, Canada: 29363, Japan: 26841},
+    {year: 2005, Italy: 30016, America: 44044, Germany: 32414, Korea: 24196, England: 32486, Switzerland: 40327, Luxembourg: 68414, France: 30504, Canada: 36329, Japan: 31668},
+    {year: 2010, Italy: 34831, America: 48396, Germany: 39916, Korea: 30365, England: 36016, Switzerland: 52860, Luxembourg: 85515, France: 35909, Canada: 40106, Japan: 34994},
+    {year: 2015, Italy: 36909, America: 56770, Germany: 47979, Korea: 35761, England: 42055, Switzerland: 63939, Luxembourg: 103788, France: 40841, Canada: 44671, Japan: 40406},
+    {year: 2018, Italy: 41837, America: 62853, Germany: 53749, Korea: 40096, England: 45505, Switzerland: 68079, Luxembourg: 113137, France: 45149, Canada: 48107, Japan: 42823},
+  ]
+
+  const data2 = [
+    {year: 1970, Italy: 10157, America: 13642, Germany: 10376, Korea: 0, England: 8113, Switzerland: 0,Luxembourg: 13117, France: 9424, Canada: 12627, Japan: 6700},
+    {year: 1980, Italy: 27213, America: 28774, Germany: 26499, Korea: 0, England: 19028, Switzerland: 0, Luxembourg: 29267, France: 24875, Canada: 26224, Japan: 18604},
+    {year: 1985, Italy: 37826, America: 40495, Germany: 37173, Korea: 12342, England: 28465, Switzerland: 0, Luxembourg: 41947, France: 35264, Canada: 36322, Japan: 28062},
+    {year: 1990, Italy: 49751, America: 50198, Germany: 47680, Korea: 19612, England: 35645, Switzerland: 0, Luxembourg: 60108, France: 44500, Canada: 42842, Japan: 38668},
+    {year: 1995, Italy: 64028, America: 61167, Germany: 53831, Korea: 29376, England: 46514, Switzerland: 0, Luxembourg: 74946, France: 53905, Canada: 51740, Japan: 45480},
+    {year: 2000, Italy: 73140, America: 74849, Germany: 61934, Korea: 40148, England: 56502, Switzerland: 66224, Luxembourg: 91456, France: 64537, Canada: 61044, Japan: 52810},
+    {year: 2005, Italy: 77951, America: 91982, Germany: 72506, Korea: 51066, England: 68290, Switzerland: 75919, Luxembourg: 103134, France: 77124, Canada: 72647, Japan: 63651},
+    {year: 2010, Italy: 92509, America: 107807, Germany: 84347, Korea: 62611, England: 77610, Switzerland: 98690, Luxembourg: 120710, France: 90727, Canada: 80394, Japan: 71144},
+    {year: 2015, Italy: 99780, America: 122451, Germany: 97468, Korea: 69690, England: 87771, Switzerland: 116686, Luxembourg: 145515, France: 102908, Canada: 88869, Japan: 80231},
+    {year: 2018, Italy: 108890, America: 132127, Germany: 106315, Korea: 77219, England: 93482, Switzerland: 123979, Luxembourg: 153423, France: 111988, Canada: 95553,Japan: 81258},
+  ]
+
+  const color = {
+    Japan: "black", 
+    America: "blue",
+    Italy: "#00CC99",
+    Germany: "red", 
+    Korea: "blue", 
+    England: "red", 
+    Switzerland: "red", 
+    Luxembourg: "cyan", 
+    Canada: "red",
+    France: "blue",
+  }
+
+  const berHeight = 10;
+  const contry = props
+  console.log("OK")
+  var mx = Math.max(Math.ceil(Math.max(...data.map((item) => item[contry])) / 10000) * 10000, Math.ceil(Math.max(...data.map((item) => item.Japan)) / 10000) * 10000)
+  var mx2 = Math.max(Math.ceil(Math.max(...data2.map((item) => item[contry])) / 10000) * 10000, Math.ceil(Math.max(...data2.map((item) => item.Japan)) / 10000) * 10000)
+  console.log(mx2)
+  var japanPre = height;
+  var contPre = height;
+  var japanPre2, contPre2;
+  console.log(props)
+  return (
+    <div id = "link1">
+      <section className = "section">
+
+        <p>こちらがGDPのグラフ</p>
+        <svg width = {width} height = {height}>
+        <g transform="scale(0.8)">
+            <g transform = "translate(90, -30)">
+                <g>
+                    <line
+                    x1 = "0"
+                    y1 = "0"
+                    x2 = "0"
+                    y2 = {height}
+                    stroke = "#888"
+                    strokeWidth = "2"
+                     />
+                </g>
+                <g>
+                  <line
+                  x1 = "0"
+                  y1 = {height - 15}
+                  x2 = {width - 200}
+                  y2 = {height - 15}
+                  stroke = "#888"
+                  strokeWidth = "2"
+                  />
+                </g>
+                <g>
+                  <ellipse
+                  cx = {width - 180}
+                  cy = {height / 4}
+                  rx = "4"
+                  ry = "4"
+                  fill = {color[contry]}
+                  />
+                  <text
+                  x = {width - 170 + contry.length * 8}
+                  y = {height / 4}
+                  textAnchor = "end"
+                  dominantBaseline = "central"
+                  >
+                  {contry}
+                  </text>
+
+                  <ellipse
+                  cx = {width - 180}
+                  cy = {height / 4 + berHeight * 2}
+                  rx = "4"
+                  ry = "4"
+                  fill = {color.Japan}
+                  />
+                  <text
+                  x = {width - 130}
+                  y = {height / 4 + 20}
+                  textAnchor = "end"
+                  dominantBaseline = "central"
+                  >
+                  {"Japan"}
+                  </text>
+                </g>
+                <g>
+                {data.map((item, i) =>{
+                  contPre = data[Math.max(0, i - 1)][contry]
+                  japanPre = data[Math.max(0, i - 1)]["Japan"]
+                return (
+                    <g>
+                      
+                      <g>
+                        <line
+                          x1 = {Math.max(0, 50 * (i - 1))}
+                          y1 = {height - contPre / mx * (height - 65) - 15}
+                          x2 = {50 * (i)}
+                          y2 = {height - item[contry] / mx * (height -65) - 15}
+                          stroke = "#888"
+                          />
+                        <line
+                          x1 = {Math.max(0, 50 * (i - 1))}
+                          y1 = {height - japanPre / mx * (height - 65) - 15}
+                          x2 = {50 * i}
+                          y2 = {height - item.Japan / mx * (height - 65) - 15}
+                          stroke = "#888"
+                          fill = {color.Japan}
+                          />
+                      </g>
+                      <g
+                      key = {item.year}
+                      transform = {`translate(${50 * (i)}, 0)`}
+                      >
+                      <ellipse
+                        cx = {0}
+                        cy = {height - item[contry] / mx * (height - 65) - 15}
+                        rx = "3"
+                        ry = "3"
+                        fill = {color[contry]}
+                      />
+                      <ellipse
+                        cx = {0}
+                        cy = {height - item.Japan / mx * (height - 65) - 15}
+                        rx = "3"
+                        ry = "3"
+                        fill = {color.Japan}
+                        />
+                      <text
+                          x = "15"
+                          y = {height + 15}
+                          textAnchor = "end"
+                          dominantBaseline = "central"
+                      >
+                          {item.year}
+                      </text>
+                      </g>
+                      <g
+                        key = {5000 * i}
+                        transform = {`translate(0, ${-50 * (i + 1)})`}
+                      >
+                      <line
+                          x1 = "0"
+                          y1 = {height - 15}
+                          x2 = {width - 200}
+                          y2 = {height - 15}
+                          stroke = "#888"
+                      />
+                      <text
+                          x = "-5"
+                          y = {height - 15}
+                          textAnchor = "end"
+                          dominantBaseline = "central"
+                          >
+                          {mx / 10 * (i + 1)}
+                          </text>
+                      </g>
+                    <text
+                    x = "-5"
+                    y = {height - 15}
+                    textAnchor = "end"
+                    dominantBaseline = "central"
+                    >
+                    {0}
+                    </text>
+                    </g>
+                )
+            })}
+            
+          </g>
+          
+        </g>
+        </g>
+        </svg>
+
+      <p>こちらは労働生産性のグラフ</p>
+        <svg width = {width} height = {height} id = "link2">
+          <g transform = "scale(0.8)">
+            <g transform = "translate(90, -30)">
+                <g>
+                    <line
+                    x1 = "0"
+                    y1 = "0"
+                    x2 = "0"
+                    y2 = {height}
+                    stroke = "#888"
+                    strokeWidth = "2"
+                     />
+                </g>
+                <g>
+                  <line
+                  x1 = "0"
+                  y1 = {height - 15}
+                  x2 = {width - 200}
+                  y2 = {height - 15}
+                  stroke = "#888"
+                  strokeWidth = "2"
+                  />
+                </g>
+                <g>
+                  <ellipse
+                  cx = {width - 180}
+                  cy = {height / 4}
+                  rx = "4"
+                  ry = "4"
+                  fill = {color[contry]}
+                  />
+                  <text
+                  x = {width - 170 + contry.length * 8}
+                  y = {height / 4}
+                  textAnchor = "end"
+                  dominantBaseline = "central"
+                  >
+                  {contry}
+                  </text>
+
+                  <ellipse
+                  cx = {width - 180}
+                  cy = {height / 4 + berHeight * 2}
+                  rx = "4"
+                  ry = "4"
+                  fill = {color.Japan}
+                  />
+                  <text
+                  x = {width - 130}
+                  y = {height / 4 + 20}
+                  textAnchor = "end"
+                  dominantBaseline = "central"
+                  >
+                  {"Japan"}
+                  </text>
+                </g>
+                <g>
+                {data2.map((item, i) =>{
+                  contPre2 = data2[Math.max(0, i - 1)][contry]
+                  japanPre2 = data2[Math.max(0, i - 1)]["Japan"]
+                return (
+                    <g>
+                      
+                      <g>
+                        <line
+                          x1 = {Math.max(0, 50 * (i - 1))}
+                          y1 = {height - contPre2 / mx2 * (height - 65) - 15}
+                          x2 = {50 * (i)}
+                          y2 = {height - item[contry] / mx2 * (height -65) - 15}
+                          stroke = "#888"
+                          />
+                        <line
+                          x1 = {Math.max(0, 50 * (i - 1))}
+                          y1 = {height - japanPre2 / mx2 * (height - 65) - 15}
+                          x2 = {50 * i}
+                          y2 = {height - item.Japan / mx2 * (height - 65) - 15}
+                          stroke = "#888"
+                          fill = {color.Japan}
+                          />
+                      </g>
+                      <g
+                      key = {item.year}
+                      transform = {`translate(${50 * (i)}, 0)`}
+                      >
+                      <ellipse
+                        cx = {0}
+                        cy = {height - item[contry] / mx2 * (height - 65) - 15}
+                        rx = "3"
+                        ry = "3"
+                        fill = {color[contry]}
+                      />
+                      <ellipse
+                        cx = {0}
+                        cy = {height - item.Japan / mx2 * (height - 65) - 15}
+                        rx = "3"
+                        ry = "3"
+                        fill = {color.Japan}
+                        />
+                      <text
+                          x = "15"
+                          y = {height + 15}
+                          textAnchor = "end"
+                          dominantBaseline = "central"
+                      >
+                          {item.year}
+                      </text>
+                      </g>
+                      <g
+                        key = {5000 * i}
+                        transform = {`translate(0, ${-50 * (i + 1)})`}
+                      >
+                      <line
+                          x1 = "0"
+                          y1 = {height - 15}
+                          x2 = {width - 200}
+                          y2 = {height - 15}
+                          stroke = "#888"
+                      />
+                      <text
+                          x = "-5"
+                          y = {height - 15}
+                          textAnchor = "end"
+                          dominantBaseline = "central"
+                          >
+                          {mx2 / 10 * (i + 1)}
+                          </text>
+                      </g>
+                    <text
+                    x = "-5"
+                    y = {height - 15}
+                    textAnchor = "end"
+                    dominantBaseline = "central"
+                    >
+                    {0}
+                    </text>
+                    </g>
+                )
+            })}
+            
+          </g>
+          
+        </g>
+        </g>
+        </svg>
+      </section>
+    </div>
+  )
+}
+
 
 
 export default App;
